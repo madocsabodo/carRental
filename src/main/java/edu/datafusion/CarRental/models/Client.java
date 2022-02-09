@@ -2,7 +2,7 @@ package edu.datafusion.CarRental.models;
 
 import java.time.LocalDate;
 
-public class ClientModel {
+public class Client {
     private Long id;
     private String name;
     private String insuranceNumber;

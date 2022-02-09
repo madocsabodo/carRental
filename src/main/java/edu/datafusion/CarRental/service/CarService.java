@@ -1,11 +1,10 @@
 package edu.datafusion.CarRental.service;
 
-import edu.datafusion.CarRental.models.CarModel;
-import edu.datafusion.CarRental.repositories.Car;
-import edu.datafusion.CarRental.repositories.CarRepository;
+import edu.datafusion.CarRental.models.Car;
+import edu.datafusion.CarRental.repository.CarBE;
+import edu.datafusion.CarRental.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.annotation.SessionScope;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -17,19 +16,19 @@ public class CarService {
     @Autowired
     private CarRepository carRepository;
 
-    public List<CarModel> findAll() {
+    public List<Car> findAll() {
         return carRepository.findAll().stream()
                 .map(this::toCarModel)
                 .collect(Collectors.toList());
     }
 
-    public CarModel addCar(CarModel carModel) {
-        Car car = carRepository.addCar(toCar(carModel));
+    public Car addCar(Car carModel) {
+        CarBE car = carRepository.addCar(toCar(carModel));
         return toCarModel(car);
     }
 
-    private Car toCar(CarModel carModel) {
-        Car car = new Car();
+    private CarBE toCar(Car carModel) {
+        CarBE car = new CarBE();
         car.setMake(carModel.getMake());
         car.setModel(carModel.getModel());
         car.setFuelType(carModel.getFuelType());
@@ -46,22 +45,31 @@ public class CarService {
         return car;
     }
 
-    private CarModel toCarModel(Car car) {
-        CarModel carModel = new CarModel();
-        carModel.setId(car.getId());
-        carModel.setMake(car.getMake());
-        carModel.setModel(car.getModel());
-        carModel.setFuelType(car.getFuelType());
-        carModel.setBodyType(car.getBodyType());
-        carModel.setColor(car.getColor());
-        carModel.setRegistrationDate(car.getRegistrationDate());
-        carModel.setHpPower(car.getHpPower());
-        carModel.setGearType(car.getGearType());
-        carModel.setNrOfDoors(car.getNrOfDoors());
-        carModel.setNrOfSeats(car.getGetNrOfSeats());
-        carModel.setDailyRate(car.getDailyRate());
-        carModel.setHourlyRate(car.getHourlyRate());
+    /**
+     * Entity to Model mapping fluent way with lombok builder.
+     *
+     * @param car
+     * @return
+     */
+    private Car toCarModel(CarBE car) {
+        return Car.builder()
+                .id(car.getId())
+                .make(car.getMake())
+                .model(car.getModel())
+                .fuelType(car.getFuelType())
+                .bodyType(car.getBodyType())
+                .color(car.getColor())
+                .registrationDate(car.getRegistrationDate())
+                .hpPower(car.getHpPower())
+                .gearType(car.getGearType())
+                .nrOfDoors(car.getNrOfDoors())
+                .nrOfSeats(car.getNrOfSeats())
+                .dailyRate(car.getDailyRate())
+                .hourlyRate(car.getHourlyRate())
+                .build();
+    }
 
-        return carModel;
+    public void deleteById(long id) {
+        carRepository.deleteById(id);
     }
 }

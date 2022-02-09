@@ -1,20 +1,16 @@
-package edu.datafusion.CarRental.repositories;
+package edu.datafusion.CarRental.repository;
 
 import javax.persistence.Id;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-
-//many to one kapcsolat
 @Entity
 @Table(name = "rental")
-public class Rental implements Serializable {
+public class RentalBE implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
-
 
     @Column(name = "client_id")
     private Long clientId;
@@ -33,15 +29,15 @@ public class Rental implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false, insertable = false, updatable = false)
-    private Client client;
+    private ClientBE clientBE;
 
-    public Rental(int id, Long clientId, Long carId) {
+    public RentalBE(int id, Long clientId, Long carId) {
         this.id = id;
         this.clientId = clientId;
         this.carId = carId;
     }
 
-    public Rental() {
+    public RentalBE() {
 
     }
 

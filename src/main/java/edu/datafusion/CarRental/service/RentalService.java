@@ -1,8 +1,8 @@
 package edu.datafusion.CarRental.service;
 
 import edu.datafusion.CarRental.models.RentalModel;
-import edu.datafusion.CarRental.repositories.Rental;
-import edu.datafusion.CarRental.repositories.RentalRepository;
+import edu.datafusion.CarRental.repository.RentalBE;
+import edu.datafusion.CarRental.repository.RentalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class    RentalService {
+public class RentalService {
     @Autowired
     private RentalRepository rentalRepository;
 
@@ -22,30 +22,30 @@ public class    RentalService {
 
     public RentalModel addRental(int carId, int clientId) {
         RentalModel rentalResponse = new RentalModel();
-        Rental rental = rentalRepository.addRental(carId, clientId);
-        return toRentalModel(rental);
+        RentalBE rentalBE = rentalRepository.addRental(carId, clientId);
+        return toRentalModel(rentalBE);
     }
 
-    private Rental toRental(RentalModel rentalModel) {
-        Rental rental = new Rental();
-        rental.setId(rentalModel.getId());
-        rental.setClientId(rentalModel.getClientId());
-        rental.setCarId(rentalModel.getCarId());
-        rental.setRentalStartDate(rentalModel.getRentalStartDate());
-        rental.setRentedHours(rentalModel.getRentedHours());
-        rental.setWasReturned(rentalModel.isWasReturned());
+    private RentalBE toRental(RentalModel rentalModel) {
+        RentalBE rentalBE = new RentalBE();
+        rentalBE.setId(rentalModel.getId());
+        rentalBE.setClientId(rentalModel.getClientId());
+        rentalBE.setCarId(rentalModel.getCarId());
+        rentalBE.setRentalStartDate(rentalModel.getRentalStartDate());
+        rentalBE.setRentedHours(rentalModel.getRentedHours());
+        rentalBE.setWasReturned(rentalModel.isWasReturned());
 
-        return rental;
+        return rentalBE;
     }
 
-    private RentalModel toRentalModel(Rental rental) {
+    private RentalModel toRentalModel(RentalBE rentalBE) {
         RentalModel rentalModel = new RentalModel();
-        rentalModel.setId(rental.getId());
-        rentalModel.setClientId(rental.getClientId());
-        rentalModel.setCarId(rental.getCarId());
-        rentalModel.setRentalStartDate(rental.getRentalStartDate());
-        rentalModel.setRentedHours(rental.getRentedHours());
-        rentalModel.setWasReturned(rental.isWasReturned());
+        rentalModel.setId(rentalBE.getId());
+        rentalModel.setClientId(rentalBE.getClientId());
+        rentalModel.setCarId(rentalBE.getCarId());
+        rentalModel.setRentalStartDate(rentalBE.getRentalStartDate());
+        rentalModel.setRentedHours(rentalBE.getRentedHours());
+        rentalModel.setWasReturned(rentalBE.isWasReturned());
 
         return rentalModel;
     }

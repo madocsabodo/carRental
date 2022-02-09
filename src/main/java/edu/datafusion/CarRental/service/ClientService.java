@@ -1,71 +1,73 @@
 package edu.datafusion.CarRental.service;
 
 
-import edu.datafusion.CarRental.models.ClientModel;
-import edu.datafusion.CarRental.repositories.Client;
-import edu.datafusion.CarRental.repositories.ClientRepository;
-import edu.datafusion.CarRental.repositories.ClientRepositoryInterface;
+import edu.datafusion.CarRental.models.Client;
+import edu.datafusion.CarRental.repository.ClientBE;
+import edu.datafusion.CarRental.repository.ClientJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Service class for business operations on Client.
+ */
 @Transactional
 @Repository
 public class ClientService {
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientJpaRepository clientJpaRepository;
 
-    @Autowired
-    private ClientRepositoryInterface clientRepositoryInterface;
-
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    /*
-    public Long findAll(){
-        Long l = clientRepositoryInterface.count();
-        return l;
-    }
+    /**
+     * Find all clients.
+     * @return list of {@link Client}.
      */
-
-    public List<ClientModel> findAll() {
-        return entityManager.createQuery("select c from Client c", Client.class).getResultList().stream()
+    public List<Client> findAll() {
+        return clientJpaRepository.findAll().stream()
                 .map(this::toClientModel)
                 .collect(Collectors.toList());
     }
 
-//findAll, add, delete tobbire is
-    public ClientModel addClient(ClientModel clientModel) {
-        ClientModel clientResponse = new ClientModel();
-        Client client = clientRepository.addClient(toClient(clientModel));
-        return toClientModel(client);
+    /**
+     * Persist a Client entity.
+     * @param client the client to be persisted.
+     * @return the {@link Client} which was persisted.
+     */
+    public Client addClient(Client client) {
+        ClientBE clientBE = clientJpaRepository.save(toClientBE(client));
+        return toClientModel(clientBE);
     }
 
-    private Client toClient(ClientModel clientModel) {
+    /**
+     * Delete a Client by Id.
+     * @param id the id of the Client.
+     */
+    public void deleteById(Long id) {
+        clientJpaRepository.deleteById(id);
+    }
+
+    private ClientBE toClientBE(Client client) {
+        ClientBE clientBE = new ClientBE();
+        clientBE.setId(client.getId());
+        clientBE.setName(client.getName());
+        clientBE.setInsuranceNumber(client.getInsuranceNumber());
+        clientBE.setDateOfBirth(client.getDateOfBirth());
+        clientBE.setLoyaltyPoints(client.getLoyalityPoints());
+
+        return clientBE;
+    }
+
+    private Client toClientModel(ClientBE clientBE) {
         Client client = new Client();
-        client.setId((long) clientModel.getId());
-        client.setName(clientModel.getName());
-        client.setInsuranceNumber(clientModel.getInsuranceNumber());
-        client.setDateOfBirth(clientModel.getDateOfBirth());
-        client.setLoyalityPoints(clientModel.getLoyalityPoints());
+        client.setId(clientBE.getId());
+        client.setName(clientBE.getName());
+        client.setInsuranceNumber(clientBE.getInsuranceNumber());
+        client.setDateOfBirth(clientBE.getDateOfBirth());
+        client.setLoyalityPoints(clientBE.getLoyaltyPoints());
 
         return client;
     }
 
-    private ClientModel toClientModel(Client client) {
-        ClientModel clientModel = new ClientModel();
-        clientModel.setId(client.getId());
-        clientModel.setName(client.getName());
-        clientModel.setInsuranceNumber(client.getInsuranceNumber());
-        clientModel.setDateOfBirth(client.getDateOfBirth());
-        clientModel.setLoyalityPoints(client.getLoyalityPoints());
-
-        return clientModel;
-    }
 }

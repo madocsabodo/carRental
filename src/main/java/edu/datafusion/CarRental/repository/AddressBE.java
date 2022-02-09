@@ -1,4 +1,4 @@
-package edu.datafusion.CarRental.repositories;
+package edu.datafusion.CarRental.repository;
 
 
 import javax.persistence.*;
@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "address")
-public class Address implements Serializable {
+public class AddressBE implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -18,7 +18,7 @@ public class Address implements Serializable {
     private String city;
 
     @OneToOne(mappedBy = "address")
-    private Client client;
+    private ClientBE clientBE;
 
     public Long getId() {
         return id;

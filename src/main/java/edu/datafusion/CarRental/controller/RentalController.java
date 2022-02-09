@@ -1,7 +1,7 @@
 package edu.datafusion.CarRental.controller;
 
 import edu.datafusion.CarRental.models.RentalModel;
-import edu.datafusion.CarRental.repositories.RentalRepository;
+import edu.datafusion.CarRental.repository.RentalRepository;
 import edu.datafusion.CarRental.service.RentalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
