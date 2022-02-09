@@ -14,8 +14,8 @@ public class ClientHibernateRepositoryImpl implements ClientHibernateRepository 
     @Override
     public List<ClientBE> findClientsInLoyalityPointInterval(int min, int max) {
         return em.createNamedQuery(ClientBE.FIND_BY_LOYALTY_POINTS, ClientBE.class)
-                .setParameter(min,ClientBE.LOYALTY_MIN)
-                .setParameter(max, ClientBE.LOYALTY_MAX)
+                .setParameter(ClientBE.LOYALTY_MIN, min)
+                .setParameter(ClientBE.LOYALTY_MAX, max)
                 .getResultList();
     }
 }

@@ -3,7 +3,7 @@ package edu.datafusion.CarRental.service;
 
 import edu.datafusion.CarRental.models.Client;
 import edu.datafusion.CarRental.repository.ClientBE;
-import edu.datafusion.CarRental.repository.ClientJpaRepository;
+import edu.datafusion.CarRental.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -18,34 +18,37 @@ import java.util.stream.Collectors;
 @Repository
 public class ClientService {
     @Autowired
-    private ClientJpaRepository clientJpaRepository;
+    private ClientRepository clientRepository;
 
     /**
      * Find all clients.
+     *
      * @return list of {@link Client}.
      */
     public List<Client> findAll() {
-        return clientJpaRepository.findAll().stream()
+        return clientRepository.findAll().stream()
                 .map(this::toClientModel)
                 .collect(Collectors.toList());
     }
 
     /**
      * Persist a Client entity.
+     *
      * @param client the client to be persisted.
      * @return the {@link Client} which was persisted.
      */
     public Client addClient(Client client) {
-        ClientBE clientBE = clientJpaRepository.save(toClientBE(client));
+        ClientBE clientBE = clientRepository.save(toClientBE(client));
         return toClientModel(clientBE);
     }
 
     /**
      * Delete a Client by Id.
+     *
      * @param id the id of the Client.
      */
     public void deleteById(Long id) {
-        clientJpaRepository.deleteById(id);
+        clientRepository.deleteById(id);
     }
 
     private ClientBE toClientBE(Client client) {
@@ -70,4 +73,10 @@ public class ClientService {
         return client;
     }
 
+    public List<Client> findClientsInLoyaltyPointInterval(int min, int max) {
+        return clientRepository.findClientsInLoyalityPointInterval(min, max)
+                .stream()
+                .map(this::toClientModel)
+                .collect(Collectors.toList());
+    }
 }

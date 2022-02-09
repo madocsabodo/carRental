@@ -5,9 +5,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.ApplicationScope;
 
 import javax.annotation.PostConstruct;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +19,7 @@ public class RentalRepository {
     private CarRepository carRepository;
 
     @Autowired
-    private ClientJpaRepository clientJpaRepository;
+    private ClientRepository clientJpaRepository;
 
     @PostConstruct
     public void readRentals() {

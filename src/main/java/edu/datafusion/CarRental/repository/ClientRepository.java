@@ -10,5 +10,5 @@ import java.util.List;
  * Repository for Client with Spring Data.
  */
 @Repository
-public interface ClientJpaRepository extends JpaRepository<ClientBE, Long>, ClientHibernateRepository{
+public interface ClientRepository extends JpaRepository<ClientBE, Long>, ClientHibernateRepository{
 }

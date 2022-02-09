@@ -15,7 +15,7 @@ import java.util.List;
 @Entity
 @Table(name = "client")
 @Data
-@NamedQueries(@NamedQuery(name = ClientBE.FIND_BY_LOYALTY_POINTS, query = "select c from ClientBE c where loyalityPoints between :"
+@NamedQueries(@NamedQuery(name = ClientBE.FIND_BY_LOYALTY_POINTS, query = "select c from ClientBE c where loyaltyPoints between :"
         + ClientBE.LOYALTY_MIN + " and :" + ClientBE.LOYALTY_MAX))
 public class ClientBE {
     public static final String FIND_BY_LOYALTY_POINTS = "findByLoyaltyPoints";
