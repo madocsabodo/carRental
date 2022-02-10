@@ -2,7 +2,7 @@ package edu.datafusion.CarRental.service;
 
 
 import edu.datafusion.CarRental.models.Client;
-import edu.datafusion.CarRental.repository.ClientBE;
+import edu.datafusion.CarRental.repository.entity.ClientBE;
 import edu.datafusion.CarRental.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

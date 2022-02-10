@@ -1,10 +1,7 @@
 package edu.datafusion.CarRental.models;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -12,6 +9,7 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Car {
     private Long id;
     private String make;
@@ -26,13 +24,4 @@ public class Car {
     private int nrOfSeats;
     private int dailyRate;
     private int hourlyRate;
-
-    @Override
-    public String toString() {
-        return "Car [id=" + id + ", make=" + make + ", model=" + model + ", fuel_type=" + fuelType + ", body_type="
-                + bodyType + ", color=" + color + ", registration_date=" + registrationDate + ", gear_type="
-                + gearType + ", hp_power=" + hpPower + ", nr_of_doors=" + nrOfDoors + ", nr_of_seats=" + nrOfSeats
-                + ", daily_rate=" + dailyRate + ", hourly_rate=" + hourlyRate + "]";
-    }
-
 }

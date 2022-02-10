@@ -1,12 +1,10 @@
-package edu.datafusion.CarRental.repository;
+package edu.datafusion.CarRental.repository.entity;
 
 import lombok.Data;
 
 import javax.persistence.Id;
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -35,7 +33,7 @@ public class ClientBE {
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
-    @Column(name = "loyality_points")
+    @Column(name = "loyalty_points")
     private int loyaltyPoints;
 
     @OneToOne(cascade = CascadeType.ALL)

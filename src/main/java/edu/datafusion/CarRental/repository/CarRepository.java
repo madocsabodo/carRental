@@ -1,5 +1,6 @@
 package edu.datafusion.CarRental.repository;
 
+import edu.datafusion.CarRental.repository.entity.CarBE;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

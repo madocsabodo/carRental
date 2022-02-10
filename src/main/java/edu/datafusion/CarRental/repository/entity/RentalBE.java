@@ -1,4 +1,4 @@
-package edu.datafusion.CarRental.repository;
+package edu.datafusion.CarRental.repository.entity;
 
 import javax.persistence.Id;
 import javax.persistence.*;

@@ -1,5 +1,7 @@
-package edu.datafusion.CarRental.repository;
+package edu.datafusion.CarRental.repository.entity;
 
+
+import edu.datafusion.CarRental.repository.entity.ClientBE;
 
 import javax.persistence.*;
 import java.io.Serializable;

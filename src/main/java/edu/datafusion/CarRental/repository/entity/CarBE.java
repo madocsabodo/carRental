@@ -1,4 +1,4 @@
-package edu.datafusion.CarRental.repository;
+package edu.datafusion.CarRental.repository.entity;
 
 import edu.datafusion.CarRental.models.BodyType;
 import edu.datafusion.CarRental.models.Color;

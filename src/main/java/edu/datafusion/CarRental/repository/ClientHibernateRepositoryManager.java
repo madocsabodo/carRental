@@ -1,7 +1,6 @@
 package edu.datafusion.CarRental.repository;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import edu.datafusion.CarRental.repository.entity.ClientBE;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

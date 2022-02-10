@@ -1,5 +1,7 @@
 package edu.datafusion.CarRental.repository;
 
+import edu.datafusion.CarRental.repository.entity.CarBE;
+import edu.datafusion.CarRental.repository.entity.RentalBE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.ApplicationScope;
