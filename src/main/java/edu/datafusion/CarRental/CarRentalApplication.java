@@ -48,8 +48,7 @@ public class CarRentalApplication {
 
 	/**
 	 * Listen on 80 and redirect to 443
-	 * @return
-	 */
+     */
 	private Connector redirectConnector(){
 		Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
 		connector.setScheme("http");
