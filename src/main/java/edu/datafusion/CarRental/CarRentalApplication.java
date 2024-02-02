@@ -17,6 +17,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 		basePackages = "edu.datafusion.CarRental.repository", repositoryImplementationPostfix = "Manager")
 public class CarRentalApplication {
 
+	/**
+	 *
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		SpringApplication.run(CarRentalApplication.class, args);
 	}
